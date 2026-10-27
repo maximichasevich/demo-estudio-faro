@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Cormorant_Garamond, DM_Mono, Hanken_Grotesk } from "next/font/google"
 
+import { sitio } from "@/config/sitio"
 import "./faro.css"
 
 /* Tipografía propia de Estudio Faro: serif fina para titulares, mono para
@@ -29,7 +30,15 @@ export const metadata: Metadata = {
   title: { absolute: "Estudio Faro · Arquitectura en Montevideo" },
   description:
     "Estudio de arquitectura en Montevideo. Viviendas, espacios comerciales e interiores entre el Río de la Plata y el Atlántico. Conocé las obras y agendá una primera reunión.",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
+  openGraph: {
+    type: "website",
+    locale: "es_UY",
+    siteName: `${sitio.nombre} · proyecto de muestra`,
+    title: "Estudio Faro · Arquitectura en Montevideo",
+    description:
+      "Estudio de arquitectura en Montevideo. Viviendas, espacios comerciales e interiores entre el Río de la Plata y el Atlántico. Conocé las obras y agendá una primera reunión.",
+  },
 }
 
 export const viewport: Viewport = {
