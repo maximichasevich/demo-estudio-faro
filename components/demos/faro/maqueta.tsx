@@ -412,7 +412,7 @@ export default function Maqueta() {
     s.px = e.clientX
     s.py = e.clientY
     s.t = e.timeStamp
-    const drz = dx * 0.38
+    const drz = -dx * 0.38
     const drx = -dy * 0.3
     s.rz += drz
     s.rx = Math.min(90, Math.max(0, s.rx + drx))
@@ -429,8 +429,8 @@ export default function Maqueta() {
 
   function alTeclado(e: React.KeyboardEvent<HTMLDivElement>) {
     const mapa: Record<string, [number, number]> = {
-      ArrowLeft: [-12, 0],
-      ArrowRight: [12, 0],
+      ArrowLeft: [12, 0],
+      ArrowRight: [-12, 0],
       ArrowUp: [0, 8],
       ArrowDown: [0, -8],
     }

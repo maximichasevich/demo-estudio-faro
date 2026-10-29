@@ -35,6 +35,9 @@ export function Cabecera() {
   const [activa, setActiva] = useState(0)
   const destino = useRef<string | null>(null)
   const [sobreOscuro, setSobreOscuro] = useState(true)
+  // Arriba de todo la cabecera flota sobre la foto; al bajar toma un fondo
+  // para que el logo y "Menú" no se encimen con los textos de las secciones.
+  const [bajada, setBajada] = useState(false)
 
   // El color de la cabecera sigue al fondo: claro sobre fotos y secciones
   // oscuras (marcadas con data-oscuro), carbón sobre el fondo hueso.
@@ -50,6 +53,7 @@ export function Cabecera() {
         }
       )
       setSobreOscuro(oscuro)
+      setBajada(window.scrollY > window.innerHeight * 0.6)
     }
     const alMover = () => {
       if (!cuadro) cuadro = requestAnimationFrame(medir)
@@ -73,13 +77,22 @@ export function Cabecera() {
     <>
       <header
         className={cn(
-          "pointer-events-none fixed inset-x-0 top-0 z-40 transition-colors duration-500",
+          "pointer-events-none fixed inset-x-0 top-0 z-40 border-b border-transparent transition-[color,background-color,border-color] duration-500",
           sobreOscuro
             ? "text-[var(--hueso)] [text-shadow:0_1px_12px_rgba(0,0,0,0.25)]"
-            : "text-[var(--carbon)]"
+            : "text-[var(--carbon)]",
+          bajada &&
+            (sobreOscuro
+              ? "border-white/10 bg-[var(--carbon)]/80 backdrop-blur-md"
+              : "border-black/10 bg-[var(--hueso)]/85 backdrop-blur-md")
         )}
       >
-        <div className="flex items-center justify-between px-4 py-4 sm:px-8 sm:py-6 lg:px-12">
+        <div
+          className={cn(
+            "flex items-center justify-between px-4 transition-[padding] duration-500 sm:px-8 lg:px-12",
+            bajada ? "py-2 sm:py-3" : "py-4 sm:py-6"
+          )}
+        >
           <a
             href="#inicio"
             className="pointer-events-auto"
